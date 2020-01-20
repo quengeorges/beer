@@ -1,10 +1,10 @@
-import React from 'react';
-import './App.css';
-import Accueil from './accueil';
+import React from 'react'
+import './App.css'
+import VueMain from './Vues/VueMain'
 
 function App() {
   return (
-    <Accueil/>
+    <VueMain/>
   );
 }
 

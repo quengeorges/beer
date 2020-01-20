@@ -1,6 +1,8 @@
 import React from 'react';
+import Beers from '../Beers';
+import Beer from '../Beer';
 
-class Beer extends React.Component {
+class VueFav extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -19,22 +21,14 @@ class Beer extends React.Component {
   render() {
     const { randomBeer } = this.state
     console.log('randomBeer', randomBeer)
-    if (randomBeer){
-        return (
-            <div>
-              <div>
-                  {randomBeer[0].name}
-                  <img src={randomBeer[0].image_url} width='50px' alt='beer'/>
-              </div>
-            </div>
-        );
-    }
-    else{
-        return(
-            <div/>
-        )
-    }
+    return (
+        <div>
+            <Beer/>
+            <Beers/>
+        </div>
+    );
+
   }
 }
 
-export default Beer;
+export default VueFav;
