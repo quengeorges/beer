@@ -33,7 +33,7 @@ export default function VueListe() {
   return (
     <GridList cellHeight={450} className={classes.gridList} cols={3}>
       {beers.map(item => (
-        <Card className={classes.card}>
+        <Card className={classes.card} key={item.id}>
           <CardMedia
             className={classes.media}
             image={item.image_url}
