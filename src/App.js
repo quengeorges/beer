@@ -1,26 +1,46 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
+import Random from './Containers/Random'
+import Liste from "./Containers/Liste";
+import {
+    BrowserRouter as Router, Switch, Route, Link, useParams, useRouteMatch
+} from "react-router-dom"
+import View from "./Containers/View";
+import Favoris from "./Containers/Favoris";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class App extends React.Component {
+  render() {
+      return (
+          <div className="App">
+              <Router>
+                  <ul>
+                      <li>
+                          <Link to="/fav">favoris</Link>
+                      </li>
+                      <li>
+                          <Link to="/">Home</Link>
+                      </li>
+                      <li>
+                          <Link to="/liste">Liste</Link>
+                      </li>
+                  </ul>
+
+                  <Switch>
+                      <Route exact path="/" component={Random}>
+                          <Random />
+                      </Route>
+                      <Route path="/liste">
+                          <Liste store={this.props.store} />
+                      </Route>
+                      <Route path="/view/:id" component={View} />
+                      <Route path="/fav" >
+                          <Favoris store={this.props.store}/>
+                      </Route>
+                  </Switch>
+              </Router>
+          </div>
+      )
+  }
 }
 
 export default App;
