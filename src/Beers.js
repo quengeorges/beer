@@ -1,20 +1,20 @@
 import React from 'react';
 import FavoriteToggle from "./components/FavoriteToggle";
+import {connect} from "react-redux";
+import { Card, CardColumns } from 'react-bootstrap';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 class Beers extends React.Component {
   constructor(props) {
     super(props);
-
-    console.log(this.props.beers);
-
     this.state = {
-      beers: this.props.beers !== undefined ? this.props.beers : []
+      beers: this.props.fav !== undefined ? this.props.favoritesFilm : []
     };
   }
 
   componentDidMount() {
 
-    if (this.props.beers === undefined){
+    if (this.props.fav === undefined){
 
       fetch('https://api.punkapi.com/v2/beers/')
           .then(res => res.json())
@@ -26,23 +26,51 @@ class Beers extends React.Component {
     }
 
   }
+
   render() {
+
     const { beers } = this.state;
+
     return (
-      <ul>
+
+        <CardColumns>
+
+
         {beers.map(item => (
-          <li key={item.id}>
 
-            {item.name}
+              <Card style={{ width: '18rem' }}>
+                <Card.Img
+                    variant="top"
+                    src={item.image_url}
+                    style={{
+                      height: '180px',
+                      width: '100%',
+                      display: 'block',
+                      objectFit: 'contain',
+                      backgroundColor: '#ada5a5'
+                    }} />
+                <Card.Body>
+                  <Card.Title>{item.name}</Card.Title>
+                  <Card.Text>
+                    {item.description}
+                  </Card.Text>
+                  <FavoriteToggle
+                      item={item} />
+                </Card.Body>
+              </Card>
 
-            <FavoriteToggle
-              item={item} />
+          ))}
 
-          </li>
-        ))}
-      </ul>
+        </CardColumns>
     );
+
   }
 }
 
-export default Beers;
+const mapStateToProps = (state) => {
+  return {
+    favoritesFilm: state.favoritesBeer
+  }
+};
+
+export default connect(mapStateToProps)(Beers)

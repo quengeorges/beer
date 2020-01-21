@@ -8,9 +8,10 @@ class VueListe extends React.Component {
 
   render() {
     return (
-        <div>
+
+
             <Beers/>
-        </div>
+
     );
 
   }
