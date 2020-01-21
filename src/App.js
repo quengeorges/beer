@@ -9,6 +9,10 @@ import View from "./Containers/View";
 import Favoris from "./Containers/Favoris";
 
 class App extends React.Component {
+    constructor(props) {
+        super(props);
+        localStorage.setItem('Favori', JSON.stringify([]))
+    }
   render() {
       return (
           <div className="App">

@@ -37,7 +37,8 @@ class Liste extends React.Component {
         let favs = localStorage.getItem('Favori');
         favs = favs == null ? [] : JSON.parse(favs);
         favs.push(item);
-        localStorage.setItem('Favori', JSON.stringify(favs))
+        localStorage.setItem('Favori', JSON.stringify(favs));
+        document.querySelector(`#button-${item.id}`).classList.add('inactive');
     }
 
     render() {
@@ -53,7 +54,7 @@ class Liste extends React.Component {
                     {items.map(item => (
                         <div key={item.id}>
                             <ItemList item={item}/>
-                            <button onClick={() => this.addToFavorite(item)}  key={`button-${item.id}`}>add</button>
+                            <button onClick={() => this.addToFavorite(item)}  id={`button-${item.id}`} key={`button-${item.id}`}>add</button>
                         </div>
                     ))}
                 </div>
