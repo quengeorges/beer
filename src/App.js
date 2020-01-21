@@ -4,6 +4,9 @@ import VueRandom from './Vues/VueRandom'
 import VueListe from './Vues/VueListe'
 import VueFav from './Vues/VueFav'
 
+import { Provider } from 'react-redux'
+import Store from './_store/configureStore'
+
 import {
   BrowserRouter as Router,
   Switch,
@@ -27,39 +30,41 @@ import {
 
 export default function App() {
   return (
-    <Router>
-      <div>
-        <ul>
-          <li>
-            <Link to="/">Random</Link>
-          </li>
-          <li>
-            <Link to="/liste">Liste</Link>
-          </li>
-          <li>
-            <Link to="/fav">Fav</Link>
-          </li>
-        </ul>
 
-        <hr />
+      <Provider store={Store}>
 
-        {}
+        <Router>
+          <div>
+            <ul>
+              <li>
+                <Link to="/">Random</Link>
+              </li>
+              <li>
+                <Link to="/liste">Liste</Link>
+              </li>
+              <li>
+                <Link to="/fav">Fav</Link>
+              </li>
+            </ul>
 
-        <Switch>
-          <Route exact path="/">
-            <VueRandom />
-          </Route>
-          <Route path="/liste">
-            <VueListe />
-          </Route>
-          <Route path="/fav">
-            <VueFav />
-          </Route>
-        </Switch>
-      </div>
-    </Router>
+            <hr />
 
-    
+            <Switch>
+              <Route exact path="/">
+                <VueRandom />
+              </Route>
+              <Route path="/liste">
+                <VueListe />
+              </Route>
+              <Route path="/fav">
+                <VueFav />
+              </Route>
+            </Switch>
+          </div>
+        </Router>
+
+      </Provider>
+
   );
 }
 
