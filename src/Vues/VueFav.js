@@ -1,33 +1,32 @@
 import React from 'react';
-import Beers from '../Beers';
-import Beer from '../Beer';
 
 class VueFav extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      randomBeer: null
+      beers: []
     };
   }
 
   componentDidMount() {
-    fetch('https://api.punkapi.com/v2/beers/random')
+    fetch('https://api.punkapi.com/v2/beers/')
     .then(res => res.json())
     .then((data) => {
-      this.setState({ randomBeer: data })
+      this.setState({ beers: data })
     })
     .catch(console.log)
   }
   render() {
-    const { randomBeer } = this.state
-    console.log('randomBeer', randomBeer)
+    const { beers } = this.state;
     return (
-        <div>
-            <Beer/>
-            <Beers/>
-        </div>
+      <ul>
+        {beers.map(item => (
+          <li key={item.id}>
+            {item.name} 
+          </li>
+        ))}
+      </ul>
     );
-
   }
 }
 
